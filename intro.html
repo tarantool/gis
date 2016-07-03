@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction &mdash; Tarantool GIS 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Tarantool GIS 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="Getting Started" href="getting_started.html" />
+    <link rel="prev" title="Tarantool GIS" href="index.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>Tarantool GIS 0.1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Introduction</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">Tarantool GIS</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="getting_started.html">Getting Started</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-gis">
+<span id="introduction"></span><h1>Introduction<a class="headerlink" href="#module-gis" title="Permalink to this headline">¶</a></h1>
+<p><strong>Tarantool GIS</strong> is a full-featured geospatial extension for
+<a class="reference external" href="http://tarantool.org/">Tarantool Database</a>. It&#8217;s like PostGIS, but for Tarantool.</p>
+<ul class="simple">
+<li><a class="reference internal" href="types.html#gis.Point" title="gis.Point"><code class="xref py py-func docutils literal"><span class="pre">Point()</span></code></a>, <a class="reference internal" href="types.html#gis.LineString" title="gis.LineString"><code class="xref py py-func docutils literal"><span class="pre">LineString()</span></code></a>, <a class="reference internal" href="types.html#gis.Polygon" title="gis.Polygon"><code class="xref py py-func docutils literal"><span class="pre">Polygon()</span></code></a>, <a class="reference internal" href="types.html#gis.MultiPoint" title="gis.MultiPoint"><code class="xref py py-func docutils literal"><span class="pre">MultiPoint()</span></code></a>,
+<a class="reference internal" href="types.html#gis.GeometryCollection" title="gis.GeometryCollection"><code class="xref py py-func docutils literal"><span class="pre">GeometryCollection()</span></code></a> and other geometric primitives.</li>
+<li><a class="reference internal" href="relationships.html#gis.Geometry.overlaps" title="gis.Geometry.overlaps"><code class="xref py py-func docutils literal"><span class="pre">Overlaps()</span></code></a>, <a class="reference internal" href="relationships.html#gis.Geometry.contains" title="gis.Geometry.contains"><code class="xref py py-func docutils literal"><span class="pre">Contains()</span></code></a>,
+<a class="reference internal" href="relationships.html#gis.Geometry.touches" title="gis.Geometry.touches"><code class="xref py py-func docutils literal"><span class="pre">Touches()</span></code></a>, <a class="reference internal" href="measurements.html#gis.Geometry.distance" title="gis.Geometry.distance"><code class="xref py py-func docutils literal"><span class="pre">Distance()</span></code></a>,
+<a class="reference internal" href="measurements.html#gis.Geometry.length" title="gis.Geometry.length"><code class="xref py py-func docutils literal"><span class="pre">Length()</span></code></a>, <a class="reference internal" href="measurements.html#gis.Geometry.area" title="gis.Geometry.area"><code class="xref py py-func docutils literal"><span class="pre">Area()</span></code></a> and other
+geometric functions.</li>
+<li>Database of more than 5000 spatial reference systems (SRS) and conversion
+routines.</li>
+<li>Aims to implement ISO 19125-1:2004 and ISO/IEC 13249-3 standards.</li>
+<li>Full interoperability with <a class="reference external" href="https://en.wikipedia.org/wiki/Well-known_text">WKT</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Well-known_text#Well-known_binary">WKB</a> and <a class="reference external" href="http://geojson.org/">GeoJSON</a> formats.</li>
+<li>Fast <strong>in-memory</strong> spatial indexes using Tarantool&#8217;s RTREE.</li>
+</ul>
+<p>Here is an example how to work with geometric primitives in Tarantool:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span> <span class="n">gis</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">gis&#39;</span><span class="p">)</span>
+ <span class="n">gis</span><span class="p">.</span><span class="n">install</span><span class="p">()</span>
+ <span class="c1">-- https://source.opennews.org/en-US/learning/choosing-right-map-projection/</span>
+ <span class="n">wgs84</span> <span class="o">=</span> <span class="mi">4326</span> <span class="c1">-- WGS84 World-wide Projection (Lon/Lat)</span>
+ <span class="n">nationalmap</span> <span class="o">=</span> <span class="mi">2163</span> <span class="c1">-- US National Atlas Equal Area projection (meters)</span>
+ <span class="n">calif5</span> <span class="o">=</span> <span class="mi">2770</span> <span class="c1">-- California zone 5 projection (meters)</span>
+<span class="hll"> <span class="n">nevada</span> <span class="o">=</span> <span class="n">gis</span><span class="p">.</span><span class="n">Polygon</span><span class="p">({{</span>
+</span>     <span class="p">{</span><span class="o">-</span><span class="mf">120.000000</span><span class="p">,</span> <span class="mf">42.000000</span><span class="p">};</span>
+     <span class="p">{</span><span class="o">-</span><span class="mf">114.000000</span><span class="p">,</span> <span class="mf">42.000000</span><span class="p">};</span>
+     <span class="p">{</span><span class="o">-</span><span class="mf">114.000000</span><span class="p">,</span> <span class="mf">34.687427</span><span class="p">};</span>
+     <span class="p">{</span><span class="o">-</span><span class="mf">120.000000</span><span class="p">,</span> <span class="mf">39.000000</span><span class="p">};</span>
+     <span class="p">{</span><span class="o">-</span><span class="mf">120.000000</span><span class="p">,</span> <span class="mf">42.000000</span><span class="p">};</span>
+ <span class="p">}},</span> <span class="n">wgs84</span><span class="p">)</span>
+
+ <span class="n">nevada</span><span class="p">:</span><span class="n">wkt</span><span class="p">()</span>
+ <span class="o">=&gt;</span> <span class="s2">&quot;</span><span class="s">POLYGON ((-120 42, -114 42, -114 34.687427, -120 39, -120 42))&quot;</span>
+<span class="hll">
+</span> <span class="n">lasvegas</span> <span class="o">=</span> <span class="n">gis</span><span class="p">.</span><span class="n">Point</span><span class="p">({</span><span class="o">-</span><span class="mf">115.136389</span><span class="p">,</span> <span class="mf">36.175</span><span class="p">},</span> <span class="n">wgs84</span><span class="p">)</span>
+ <span class="n">losangeles</span> <span class="o">=</span> <span class="n">gis</span><span class="p">.</span><span class="n">Point</span><span class="p">({</span><span class="o">-</span><span class="mf">118.25</span><span class="p">,</span> <span class="mf">34.05</span><span class="p">},</span> <span class="n">wgs84</span><span class="p">)</span>
+
+<span class="hll"> <span class="n">nevada</span><span class="p">:</span><span class="n">contains</span><span class="p">(</span><span class="n">lasvegas</span><span class="p">)</span>
+</span> <span class="o">=&gt;</span> <span class="kc">true</span>
+<span class="hll"> <span class="n">nevada</span><span class="p">:</span><span class="n">contains</span><span class="p">(</span><span class="n">losangeles</span><span class="p">)</span>
+</span> <span class="o">=&gt;</span> <span class="kc">false</span>
+ <span class="n">line</span> <span class="o">=</span> <span class="n">gis</span><span class="p">.</span><span class="n">LineString</span><span class="p">({</span><span class="n">lasvegas</span><span class="p">,</span> <span class="n">losangeles</span><span class="p">},</span> <span class="n">wgs84</span><span class="p">)</span>
+<span class="hll"> <span class="n">line</span><span class="p">:</span><span class="n">transform</span><span class="p">(</span><span class="n">calif5</span><span class="p">):</span><span class="n">length</span><span class="p">()</span>
+</span> <span class="o">=&gt;</span> <span class="mf">368.94277529796</span> <span class="o">-</span> <span class="n">km</span>
+<span class="hll"> <span class="n">nevada</span><span class="p">:</span><span class="n">transform</span><span class="p">(</span><span class="n">nationalmap</span><span class="p">):</span><span class="n">area</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1e-6</span>
+</span> <span class="o">=&gt;</span> <span class="mf">293496.74070953</span> <span class="c1">-- km^2</span>
+</pre></div>
+</div>
+<p>Tarantool/GIS allows to store any kinds of geometric objects in Lua table and
+Tarantool spaces, perform kNN, OVERLAPS and other queries using the
+high-speed in-memory indexes.</p>
+<p>Let&#8217;s see a k-nearest neighbors example:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span> #!/usr/bin/env tarantool
+
+ box.cfg({logger = &#39;tarantool.log&#39;})
+ local httpc = require(&#39;http.client&#39;)
+ local json = require(&#39;json&#39;)
+ local yaml = require(&#39;yaml&#39;)
+<span class="hll"> local gis = require(&#39;gis&#39;)
+</span> gis.install() -- creates system tables in Tarantool, e.g. spatial_ref_sys
+
+ local function tocube(coords)
+     return gis.Point(coords, 4326):transform(4328) -- lonlat to geocentric (3D)
+ end
+
+ box.once(&quot;data&quot;, function()
+     print(&#39;Creating spaces...&#39;)
+     local postoffices = box.schema.space.create(&quot;postoffices&quot;)
+     postoffices:create_index(&#39;primary&#39;, { type = &#39;HASH&#39;, parts = {1, &#39;num&#39;}})
+<span class="hll">     postoffices:create_index(&#39;spatial&#39;, { type = &#39;RTREE&#39;, parts = {2, &#39;array&#39;},
+</span><span class="hll">         unique = false, dimension = 3})
+</span>
+     print(&#39;Downloading source data...&#39;)
+<span class="hll">     local URL = &#39;http://api.data.mos.ru/v1/datasets/1095/rows&#39;
+</span><span class="hll">     local sourcedata = json.decode(httpc.get(URL).body)
+</span>     print(&#39;Populating database...&#39;)
+     for _, info in pairs(sourcedata) do
+         local postalcode = tonumber(info.Cells.PostalCode)
+         local lon = tonumber((info.Cells.X_WGS84:gsub(&#39;,&#39;, &#39;.&#39;)))
+         local lat = tonumber((info.Cells.Y_WGS84:gsub(&#39;,&#39;, &#39;.&#39;)))
+         local address = info.Cells.Address
+<span class="hll">         postoffices:replace({postalcode, tocube({lon, lat}):totable(), {lon, lat}, address})
+</span>     end
+ end)
+
+ local function nearby(coords, count)
+     local point = tocube(coords)
+<span class="hll">     for _, office in box.space.postoffices.index.spatial:pairs(point:totable(),
+</span><span class="hll">         { iterator = &#39;neighbor&#39; }):take(count) do
+</span>         print(json.encode({
+             PostalCode = office[1];
+             Address = office[4];
+             Distance = math.ceil(point:distance(tocube(office[3])))
+         }))
+     end
+ end
+
+<span class="hll"> nearby({37.479407, 55.862488}, 5)
+</span> --[[
+ {&quot;Address&quot;:&quot;Фестивальная улица, дом 39&quot;,&quot;Distance&quot;:463,&quot;PostalCode&quot;:125195}
+ {&quot;Address&quot;:&quot;Валдайский проезд, дом 8, строение 2&quot;,&quot;Distance&quot;:764,&quot;PostalCode&quot;:125445}
+ {&quot;Address&quot;:&quot;Петрозаводская улица, дом 9, корпус 2&quot;,&quot;Distance&quot;:985,&quot;PostalCode&quot;:125502}
+ {&quot;Address&quot;:&quot;улица Ляпидевского, дом 14&quot;,&quot;Distance&quot;:1154,&quot;PostalCode&quot;:125581}
+ {&quot;Address&quot;:&quot;Ленинградское шоссе, дом 84, корпус 2&quot;,&quot;Distance&quot;:1289,&quot;PostalCode&quot;:125565}
+ --]]
+
+<span class="hll"> nearby({37.537407, 55.796782}, 5)
+</span> --[[
+ {&quot;Address&quot;:&quot;Ленинский проспект, дом 41&quot;,&quot;Distance&quot;:150,&quot;PostalCode&quot;:119334}
+ {&quot;Address&quot;:&quot;Ленинградский проспект, дом 56&quot;,&quot;Distance&quot;:168,&quot;PostalCode&quot;:125167}
+ {&quot;Address&quot;:&quot;улица Черняховского, дом 6&quot;,&quot;Distance&quot;:696,&quot;PostalCode&quot;:125319}
+ {&quot;Address&quot;:&quot;улица Усиевича, дом 16&quot;,&quot;Distance&quot;:1232,&quot;PostalCode&quot;:125190}
+ {&quot;Address&quot;:&quot;Ленинградский проспект, дом 69&quot;,&quot;Distance&quot;:1357,&quot;PostalCode&quot;:125057}
+ --]]
+</pre></div>
+</div>
+<p>The code above downloads JSON data from the public OpenData service, parses
+it and stores into <code class="docutils literal"><span class="pre">postoffices</span></code> table. <code class="docutils literal"><span class="pre">nearby({lon,</span> <span class="pre">lat},</span> <span class="pre">count)</span></code>
+function uses spatial index to find k-nearest neighbors. Three-dimensional
+RTREE is used here together with EPSG:4328 WGS84 geocentric projection.</p>
+<p>Manage geographics primitives as a professional with the speed of
+Tarantool!</p>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">Tarantool GIS</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="getting_started.html">Getting Started</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Roman Tsisyk.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

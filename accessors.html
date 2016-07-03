@@ -1,0 +1,906 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Accessors &mdash; Tarantool GIS 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Tarantool GIS 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="Relationships" href="relationships.html" />
+    <link rel="prev" title="Types" href="types.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>Tarantool GIS 0.1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Accessors</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="types.html">Types</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="relationships.html">Relationships</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-gis">
+<span id="accessors"></span><h1>Accessors<a class="headerlink" href="#module-gis" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="49%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">SQL/MM</th>
+<th class="head">Lua</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#gis.ST.GeometryType" title="gis.ST.GeometryType"><code class="xref py py-func docutils literal"><span class="pre">ST.GeometryType()</span></code></a></td>
+<td><a class="reference internal" href="#gis.Geometry.type" title="gis.Geometry.type"><code class="xref py py-func docutils literal"><span class="pre">Geometry.type()</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gis.ST.GeometryTypeId" title="gis.ST.GeometryTypeId"><code class="xref py py-func docutils literal"><span class="pre">ST.GeometryTypeId()</span></code></a></td>
+<td><a class="reference internal" href="#gis.Geometry.typeid" title="gis.Geometry.typeid"><code class="xref py py-func docutils literal"><span class="pre">Geometry.typeid()</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gis.ST.SRID" title="gis.ST.SRID"><code class="xref py py-func docutils literal"><span class="pre">ST.SRID()</span></code></a></td>
+<td><a class="reference internal" href="#gis.Geometry.srid" title="gis.Geometry.srid"><code class="xref py py-func docutils literal"><span class="pre">Geometry.srid()</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gis.ST.Boundary" title="gis.ST.Boundary"><code class="xref py py-func docutils literal"><span class="pre">ST.Boundary()</span></code></a></td>
+<td><a class="reference internal" href="#gis.Geometry.boundary" title="gis.Geometry.boundary"><code class="xref py py-func docutils literal"><span class="pre">Geometry.boundary()</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gis.ST.Envelope" title="gis.ST.Envelope"><code class="xref py py-func docutils literal"><span class="pre">ST.Envelope()</span></code></a></td>
+<td><a class="reference internal" href="#gis.Geometry.envelope" title="gis.Geometry.envelope"><code class="xref py py-func docutils literal"><span class="pre">Geometry.envelope()</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gis.ST.IsCollection" title="gis.ST.IsCollection"><code class="xref py py-func docutils literal"><span class="pre">ST.IsCollection()</span></code></a></td>
+<td><a class="reference internal" href="#gis.Geometry.iscollection" title="gis.Geometry.iscollection"><code class="xref py py-func docutils literal"><span class="pre">Geometry.iscollection()</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gis.ST.NumGeometries" title="gis.ST.NumGeometries"><code class="xref py py-func docutils literal"><span class="pre">ST.NumGeometries()</span></code></a></td>
+<td><a class="reference internal" href="#gis.GeometryCollection.numgeometries" title="gis.GeometryCollection.numgeometries"><code class="xref py py-func docutils literal"><span class="pre">GeometryCollection.numgeometries()</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gis.ST.GeometryN" title="gis.ST.GeometryN"><code class="xref py py-func docutils literal"><span class="pre">ST.GeometryN()</span></code></a></td>
+<td><a class="reference internal" href="#gis.GeometryCollection.geometryn" title="gis.GeometryCollection.geometryn"><code class="xref py py-func docutils literal"><span class="pre">GeometryCollection.geometryn()</span></code></a>
+<a class="reference internal" href="#gis.GeometryCollection.geometry" title="gis.GeometryCollection.geometry"><code class="xref py py-func docutils literal"><span class="pre">GeometryCollection.geometry()</span></code></a>
+<a class="reference internal" href="#gis.GeometryCollection.geometries" title="gis.GeometryCollection.geometries"><code class="xref py py-func docutils literal"><span class="pre">GeometryCollection.geometries()</span></code></a>
+<a class="reference internal" href="#gis.GeometryCollection.itergeometries" title="gis.GeometryCollection.itergeometries"><code class="xref py py-func docutils literal"><span class="pre">GeometryCollection.itergeometries()</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gis.ST.NumPoints" title="gis.ST.NumPoints"><code class="xref py py-func docutils literal"><span class="pre">ST.NumPoints()</span></code></a></td>
+<td><a class="reference internal" href="#gis.Curve.numpoints" title="gis.Curve.numpoints"><code class="xref py py-func docutils literal"><span class="pre">Curve.numpoints()</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gis.ST.PointN" title="gis.ST.PointN"><code class="xref py py-func docutils literal"><span class="pre">ST.PointN()</span></code></a></td>
+<td><a class="reference internal" href="#gis.Curve.pointn" title="gis.Curve.pointn"><code class="xref py py-func docutils literal"><span class="pre">Curve.pointn()</span></code></a>
+<a class="reference internal" href="#gis.Curve.point" title="gis.Curve.point"><code class="xref py py-func docutils literal"><span class="pre">Curve.point()</span></code></a>
+<a class="reference internal" href="#gis.Curve.points" title="gis.Curve.points"><code class="xref py py-func docutils literal"><span class="pre">Curve.points()</span></code></a>
+<a class="reference internal" href="#gis.Curve.iterpoints" title="gis.Curve.iterpoints"><code class="xref py py-func docutils literal"><span class="pre">Curve.iterpoints()</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gis.ST.ExteriorRing" title="gis.ST.ExteriorRing"><code class="xref py py-func docutils literal"><span class="pre">ST.ExteriorRing()</span></code></a></td>
+<td><a class="reference internal" href="#gis.Polygon.exteriorring" title="gis.Polygon.exteriorring"><code class="xref py py-func docutils literal"><span class="pre">Polygon.exteriorring()</span></code></a>
+<a class="reference internal" href="#gis.Polygon.shell" title="gis.Polygon.shell"><code class="xref py py-func docutils literal"><span class="pre">Polygon.shell()</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gis.ST.NumInteriorRings" title="gis.ST.NumInteriorRings"><code class="xref py py-func docutils literal"><span class="pre">ST.NumInteriorRings()</span></code></a></td>
+<td><a class="reference internal" href="#gis.Polygon.numinteriorrings" title="gis.Polygon.numinteriorrings"><code class="xref py py-func docutils literal"><span class="pre">Polygon.numinteriorrings()</span></code></a>
+<a class="reference internal" href="#gis.Polygon.numholes" title="gis.Polygon.numholes"><code class="xref py py-func docutils literal"><span class="pre">Polygon.numholes()</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gis.ST.InteriorRingN" title="gis.ST.InteriorRingN"><code class="xref py py-func docutils literal"><span class="pre">ST.InteriorRingN()</span></code></a></td>
+<td><a class="reference internal" href="#gis.Polygon.interiorringn" title="gis.Polygon.interiorringn"><code class="xref py py-func docutils literal"><span class="pre">Polygon.interiorringn()</span></code></a>
+<a class="reference internal" href="#gis.Polygon.interiorring" title="gis.Polygon.interiorring"><code class="xref py py-func docutils literal"><span class="pre">Polygon.interiorring()</span></code></a>
+<a class="reference internal" href="#gis.Polygon.hole" title="gis.Polygon.hole"><code class="xref py py-func docutils literal"><span class="pre">Polygon.hole()</span></code></a>
+<a class="reference internal" href="#gis.Polygon.holes" title="gis.Polygon.holes"><code class="xref py py-func docutils literal"><span class="pre">Polygon.holes()</span></code></a>
+<a class="reference internal" href="#gis.Polygon.iterholes" title="gis.Polygon.iterholes"><code class="xref py py-func docutils literal"><span class="pre">Polygon.iterholes()</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gis.ST.X" title="gis.ST.X"><code class="xref py py-func docutils literal"><span class="pre">ST.X()</span></code></a></td>
+<td><a class="reference internal" href="#gis.Point.x" title="gis.Point.x"><code class="xref py py-func docutils literal"><span class="pre">Point.x()</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gis.ST.Y" title="gis.ST.Y"><code class="xref py py-func docutils literal"><span class="pre">ST.Y()</span></code></a></td>
+<td><a class="reference internal" href="#gis.Point.y" title="gis.Point.y"><code class="xref py py-func docutils literal"><span class="pre">Point.y()</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gis.ST.Y" title="gis.ST.Y"><code class="xref py py-func docutils literal"><span class="pre">ST.Y()</span></code></a></td>
+<td><a class="reference internal" href="#gis.Point.z" title="gis.Point.z"><code class="xref py py-func docutils literal"><span class="pre">Point.z()</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="gis.Geometry.type">
+<code class="descclassname">Geometry.</code><code class="descname">type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Geometry.type" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">geometry type</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>Returns geometry type name.</p>
+<p>This method implements OpenGIS® Simple Feature Access specification.
+OGC 06-103r4 6.1.2.2.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">Point</span><span class="p">({</span><span class="mf">37.17284</span><span class="p">,</span> <span class="mf">55.74495</span><span class="p">},</span> <span class="mi">4326</span><span class="p">):</span><span class="nb">type</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">Point</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.GeometryType">
+<code class="descclassname">ST.</code><code class="descname">GeometryType</code><span class="sig-paren">(</span><em>geometry</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.GeometryType" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a SQL/MM-compatible alias for
+<a class="reference internal" href="#gis.Geometry.type" title="gis.Geometry.type"><code class="xref py py-func docutils literal"><span class="pre">Geometry.type()</span></code></a>. SQL-MM 3: 5.1.4.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Geometry.typeid">
+<code class="descclassname">Geometry.</code><code class="descname">typeid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Geometry.typeid" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">geometry type id</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">integer</td>
+</tr>
+</tbody>
+</table>
+<p>Returns geometry type id.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">LineString</span><span class="p">({{</span><span class="mf">37.279357</span><span class="p">,</span> <span class="mf">55.849493</span><span class="p">},</span> <span class="p">{</span><span class="mf">37.275152</span><span class="p">,</span> <span class="mf">55.865005</span><span class="p">}},</span> <span class="mi">4326</span><span class="p">):</span><span class="n">typeid</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="mi">1</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.GeometryTypeId">
+<code class="descclassname">ST.</code><code class="descname">GeometryTypeId</code><span class="sig-paren">(</span><em>geometry</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.GeometryTypeId" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is an alias for <a class="reference internal" href="#gis.Geometry.typeid" title="gis.Geometry.typeid"><code class="xref py py-func docutils literal"><span class="pre">Geometry.typeid()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Geometry.srid">
+<code class="descclassname">Geometry.</code><code class="descname">srid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Geometry.srid" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Spatial Reference System Identifier</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">uint32</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the spatial reference identifier.</p>
+<p>This method implements OpenGIS® Simple Feature Access specification.
+OGC 06-103r4 6.1.2.2.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">Point</span><span class="p">({</span><span class="mf">37.17284</span><span class="p">,</span> <span class="mf">55.74495</span><span class="p">},</span> <span class="mi">4326</span><span class="p">):</span><span class="n">srid</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="mi">4326</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.SRID">
+<code class="descclassname">ST.</code><code class="descname">SRID</code><span class="sig-paren">(</span><em>geometry</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.SRID" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a SQL/MM-compatible alias for
+<a class="reference internal" href="#gis.Geometry.srid" title="gis.Geometry.srid"><code class="xref py py-func docutils literal"><span class="pre">Geometry.srid()</span></code></a>. SQL-MM 3: 5.1.5.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Geometry.boundary">
+<code class="descclassname">Geometry.</code><code class="descname">boundary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Geometry.boundary" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">closure</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="types.html#gis.Geometry" title="gis.Geometry">Geometry</a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the closure of the combinatorial boundary of this geometric object.
+Because the result of this function is a closure, and hence topologically
+closed, the resulting boundary can be represented using representational
+Geometry primitives.</p>
+<p>This method implements OpenGIS® Simple Feature Access specification.
+OGC 06-103r4 6.1.2.2.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">Polygon</span><span class="p">({</span> <span class="p">{{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">130</span><span class="p">},</span> <span class="p">{</span><span class="mi">50</span><span class="p">,</span> <span class="mi">190</span><span class="p">},</span> <span class="p">{</span><span class="mi">110</span><span class="p">,</span> <span class="mi">190</span><span class="p">},</span> <span class="p">{</span><span class="mi">140</span><span class="p">,</span> <span class="mi">150</span><span class="p">},</span> <span class="p">{</span><span class="mi">150</span><span class="p">,</span> <span class="mi">80</span><span class="p">},</span> <span class="p">{</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">},</span> <span class="p">{</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">},</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">130</span><span class="p">}},</span>
+         <span class="o">&gt;</span> <span class="p">{{</span><span class="mi">70</span><span class="p">,</span> <span class="mi">40</span><span class="p">},</span> <span class="p">{</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">},</span> <span class="p">{</span><span class="mi">120</span><span class="p">,</span> <span class="mi">80</span><span class="p">},</span> <span class="p">{</span><span class="mi">80</span><span class="p">,</span> <span class="mi">110</span><span class="p">},</span> <span class="p">{</span><span class="mi">50</span><span class="p">,</span> <span class="mi">90</span><span class="p">},</span> <span class="p">{</span><span class="mi">70</span><span class="p">,</span> <span class="mi">40</span><span class="p">}}</span> <span class="p">},</span> <span class="mi">0</span><span class="p">):</span><span class="n">boundary</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">MULTILINESTRING</span> <span class="p">((</span><span class="mi">10</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">50</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">110</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">140</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">150</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">100</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">10</span> <span class="mi">130</span><span class="p">),</span>
+  <span class="p">(</span><span class="mi">70</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">100</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">120</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">80</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">50</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">70</span> <span class="mi">40</span><span class="p">))</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.Boundary">
+<code class="descclassname">ST.</code><code class="descname">Boundary</code><span class="sig-paren">(</span><em>geometry</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.Boundary" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a SQL/MM-compatible alias for <a class="reference internal" href="#gis.Geometry.boundary" title="gis.Geometry.boundary"><code class="xref py py-func docutils literal"><span class="pre">Geometry.boundary()</span></code></a>.
+SQL-MM 3: 5.1.14.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Geometry.envelope">
+<code class="descclassname">Geometry.</code><code class="descname">envelope</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Geometry.envelope" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">minimum bounding box</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="types.html#gis.Polygon" title="gis.Polygon">Polygon</a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns the minimum bounding box for this Geometry.</p>
+<p>This method implements OpenGIS® Simple Feature Access specification.
+OGC 06-103r4 6.1.2.2.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">Polygon</span><span class="p">({{{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">130</span><span class="p">},</span> <span class="p">{</span><span class="mi">50</span><span class="p">,</span> <span class="mi">190</span><span class="p">},</span> <span class="p">{</span><span class="mi">110</span><span class="p">,</span> <span class="mi">190</span><span class="p">},</span> <span class="p">{</span><span class="mi">140</span><span class="p">,</span> <span class="mi">150</span><span class="p">},</span> <span class="p">{</span><span class="mi">150</span><span class="p">,</span> <span class="mi">80</span><span class="p">},</span> <span class="p">{</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">},</span> <span class="p">{</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">},</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">130</span><span class="p">}}},</span> <span class="mi">0</span><span class="p">):</span><span class="n">envelope</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">POLYGON</span> <span class="p">((</span><span class="mi">10</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">150</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">150</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">10</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">10</span> <span class="mi">10</span><span class="p">))</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.Envelope">
+<code class="descclassname">ST.</code><code class="descname">Envelope</code><span class="sig-paren">(</span><em>geometry</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.Envelope" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a SQL/MM-compatible alias for <a class="reference internal" href="#gis.Geometry.boundary" title="gis.Geometry.boundary"><code class="xref py py-func docutils literal"><span class="pre">Geometry.boundary()</span></code></a>.
+SQL-MM 3: 5.1.15.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Geometry.iscollection">
+<code class="descclassname">Geometry.</code><code class="descname">iscollection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Geometry.iscollection" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">true if geometry is collection</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+<p>Returns true if geometry is a collection. See <a class="reference internal" href="types.html"><em>Types</em></a> for
+details.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">Point</span><span class="p">({</span><span class="mf">37.17284</span><span class="p">,</span> <span class="mf">55.74495</span><span class="p">},</span> <span class="mi">4326</span><span class="p">):</span><span class="n">iscollection</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="kc">false</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">MultiPoint</span><span class="p">({{</span><span class="mf">37.279357</span><span class="p">,</span> <span class="mf">55.849493</span><span class="p">},</span> <span class="p">{</span><span class="mf">37.275152</span><span class="p">,</span> <span class="mf">55.865005</span><span class="p">}},</span> <span class="mi">4326</span><span class="p">):</span><span class="n">iscollection</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="kc">true</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.IsCollection">
+<code class="descclassname">ST.</code><code class="descname">IsCollection</code><span class="sig-paren">(</span><em>geometry</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.IsCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a PostGIS-compatible alias for
+<a class="reference internal" href="#gis.Geometry.iscollection" title="gis.Geometry.iscollection"><code class="xref py py-func docutils literal"><span class="pre">Geometry.iscollection()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Point.x">
+<code class="descclassname">Point.</code><code class="descname">x</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Point.x" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">x-coordinate</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">double</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the x-coordinate value for this point.</p>
+<p>This method implements OpenGIS® Simple Feature Access specification.
+OGC 06-103r4 6.1.4.2.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">Point</span><span class="p">({</span><span class="mf">37.17284</span><span class="p">,</span> <span class="mf">55.74495</span><span class="p">},</span> <span class="mi">4326</span><span class="p">):</span><span class="n">x</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="mf">37.17284</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.X">
+<code class="descclassname">ST.</code><code class="descname">X</code><span class="sig-paren">(</span><em>point</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.X" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a SQL/MM-compatible alias for <a class="reference internal" href="#gis.Point.x" title="gis.Point.x"><code class="xref py py-func docutils literal"><span class="pre">Point.x()</span></code></a>.
+SQL-MM 3: 6.1.3.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Point.y">
+<code class="descclassname">Point.</code><code class="descname">y</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Point.y" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">y-coordinate</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">double</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the y-coordinate value for this point.</p>
+<p>This method implements OpenGIS® Simple Feature Access specification.
+OGC 06-103r4 6.1.4.2.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">Point</span><span class="p">({</span><span class="mf">37.17284</span><span class="p">,</span> <span class="mf">55.74495</span><span class="p">},</span> <span class="mi">4326</span><span class="p">):</span><span class="n">y</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="mf">55.74495</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.Y">
+<code class="descclassname">ST.</code><code class="descname">Y</code><span class="sig-paren">(</span><em>point</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.Y" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a SQL/MM-compatible alias for <a class="reference internal" href="#gis.Point.y" title="gis.Point.y"><code class="xref py py-func docutils literal"><span class="pre">Point.y()</span></code></a>.
+SQL-MM 3: 6.1.4.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Point.z">
+<code class="descclassname">Point.</code><code class="descname">z</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Point.z" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">z-coordinate</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">double or nil</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">on error</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the z-coordinate value for this point if it has one. Returns
+<code class="docutils literal"><span class="pre">nil</span></code> otherwise.</p>
+<p>This method implements OpenGIS® Simple Feature Access specification.
+OGC 06-103r4 6.1.4.2.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">Point</span><span class="p">({</span><span class="mf">37.17284</span><span class="p">,</span> <span class="mf">55.74495</span><span class="p">},</span> <span class="mi">4326</span><span class="p">):</span><span class="n">z</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">null</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">Point</span><span class="p">({</span><span class="mf">2867223.8779605</span><span class="p">,</span> <span class="mf">2174199.925114</span><span class="p">,</span> <span class="mf">5248510.4102534</span><span class="p">},</span> <span class="mi">4328</span><span class="p">):</span><span class="n">z</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="mf">5248510.4102534</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.Z">
+<code class="descclassname">ST.</code><code class="descname">Z</code><span class="sig-paren">(</span><em>point</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a SQL/MM-compatible alias for <a class="reference internal" href="#gis.Point.z" title="gis.Point.z"><code class="xref py py-func docutils literal"><span class="pre">Point.z()</span></code></a>.
+SQL-MM 3: 6.1.5.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Curve.numpoints">
+<code class="descclassname">Curve.</code><code class="descname">numpoints</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Curve.numpoints" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the number of points in a curve</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">on error</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the number of points in a <a class="reference internal" href="types.html#gis.Curve" title="gis.Curve"><code class="xref py py-class docutils literal"><span class="pre">Curve</span></code></a>.</p>
+<p>This method implements OpenGIS® Simple Feature Access specification.
+OGC 06-103r4 6.1.7.2.</p>
+<p>See <a class="reference internal" href="#gis.Curve.point" title="gis.Curve.point"><code class="xref py py-func docutils literal"><span class="pre">Curve.point()</span></code></a> for examples.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.NumPoints">
+<code class="descclassname">ST.</code><code class="descname">NumPoints</code><span class="sig-paren">(</span><em>curve</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.NumPoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a SQL/MM-compatible alias for <a class="reference internal" href="#gis.Curve.numpoints" title="gis.Curve.numpoints"><code class="xref py py-func docutils literal"><span class="pre">Curve.numpoints()</span></code></a>.
+SQL-MM 3: 7.2.4.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Curve.point">
+<code class="descclassname">Curve.</code><code class="descname">point</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.Curve.point" title="Permalink to this definition">¶</a></dt>
+<dt id="gis.Curve.pointn">
+<code class="descclassname">Curve.</code><code class="descname">pointn</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.Curve.pointn" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<em>integer</em>) &#8211; one-based index</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Nth point of a curve</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="types.html#gis.Point" title="gis.Point">Point</a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns Nth point of a curve. Returns nil if n is out of
+bounds.</p>
+<p>This method implements OpenGIS® Simple Feature Access specification.
+OGC 06-103r4 6.1.7.2.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">linestring</span> <span class="o">=</span> <span class="n">gis</span><span class="p">.</span><span class="n">LineString</span><span class="p">({{</span><span class="mf">37.279357</span><span class="p">,</span> <span class="mf">55.849493</span><span class="p">},</span> <span class="p">{</span><span class="mf">37.275152</span><span class="p">,</span> <span class="mf">55.865005</span><span class="p">}},</span> <span class="mi">4326</span><span class="p">)</span>
+<span class="c1">---</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">linestring</span><span class="p">:</span><span class="n">numpoints</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="mi">2</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">linestring</span><span class="p">:</span><span class="n">pointn</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">POINT</span> <span class="p">(</span><span class="mf">37.279357</span> <span class="mf">55.849493</span><span class="p">)</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">linestring</span><span class="p">:</span><span class="n">pointn</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">null</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">linestring</span><span class="p">:</span><span class="n">points</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="o">-</span> <span class="n">POINT</span> <span class="p">(</span><span class="mf">37.279357</span> <span class="mf">55.849493</span><span class="p">)</span>
+  <span class="o">-</span> <span class="n">POINT</span> <span class="p">(</span><span class="mf">37.275152</span> <span class="mf">55.865005</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">point</span> <span class="k">in</span> <span class="n">linestring</span><span class="p">:</span><span class="n">iterpoints</span><span class="p">()</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">point</span><span class="p">)</span> <span class="k">end</span>
+<span class="mi">1</span>       <span class="n">POINT</span> <span class="p">(</span><span class="mf">37.279357</span> <span class="mf">55.849493</span><span class="p">)</span>
+<span class="mi">2</span>       <span class="n">POINT</span> <span class="p">(</span><span class="mf">37.275152</span> <span class="mf">55.865005</span><span class="p">)</span>
+<span class="c1">---</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.PointN">
+<code class="descclassname">ST.</code><code class="descname">PointN</code><span class="sig-paren">(</span><em>curve</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.PointN" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a SQL/MM-compatible alias for <a class="reference internal" href="#gis.Curve.pointn" title="gis.Curve.pointn"><code class="xref py py-func docutils literal"><span class="pre">Curve.pointn()</span></code></a>.
+SQL-MM 3: 7.2.5.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Curve.points">
+<code class="descclassname">Curve.</code><code class="descname">points</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Curve.points" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">array of points of a curve</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">[Point]</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">on error</td>
+</tr>
+</tbody>
+</table>
+<p>Returns a Lua table with points of this collection. This method
+also supports non-collections geometric types.</p>
+<p>See <a class="reference internal" href="#gis.Curve.pointn" title="gis.Curve.pointn"><code class="xref py py-func docutils literal"><span class="pre">Curve.pointn()</span></code></a> for examples.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Curve.iterpoints">
+<code class="descclassname">Curve.</code><code class="descname">iterpoints</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Curve.iterpoints" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">iterator over points of this curve</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Lua iterator (gen, param, state)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">on error</td>
+</tr>
+</tbody>
+</table>
+<p>Returns a Lua iterator (gen, param, state) over points of this curve.</p>
+<p>See <a class="reference internal" href="#gis.Curve.pointn" title="gis.Curve.pointn"><code class="xref py py-func docutils literal"><span class="pre">Curve.pointn()</span></code></a> for examples.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Polygon.shell">
+<code class="descclassname">Polygon.</code><code class="descname">shell</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Polygon.shell" title="Permalink to this definition">¶</a></dt>
+<dt id="gis.Polygon.exteriorring">
+<code class="descclassname">Polygon.</code><code class="descname">exteriorring</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Polygon.exteriorring" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a linear ring representing the exterior ring of a polygon</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="types.html#gis.LinearRing" title="gis.LinearRing">LinearRing</a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns a linear ring representing the exterior ring of a polygon.</p>
+<p>This method implements OpenGIS® Simple Feature Access specification.
+OGC 06-103r4 6.1.11.2.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">shell</span> <span class="o">=</span> <span class="p">{</span>
+         <span class="o">&gt;</span>     <span class="p">{</span><span class="mf">37.279357</span><span class="p">,</span> <span class="mf">55.849493</span><span class="p">};</span>
+         <span class="o">&gt;</span>     <span class="p">{</span><span class="mf">37.275152</span><span class="p">,</span> <span class="mf">55.865005</span><span class="p">};</span>
+         <span class="o">&gt;</span>     <span class="p">{</span><span class="mf">37.261676</span><span class="p">,</span> <span class="mf">55.864041</span><span class="p">};</span>
+         <span class="o">&gt;</span>     <span class="p">{</span><span class="mf">37.279357</span><span class="p">,</span> <span class="mf">55.849493</span><span class="p">};</span>
+         <span class="o">&gt;</span> <span class="p">}</span>
+<span class="c1">---</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">Polygon</span><span class="p">({</span><span class="n">shell</span><span class="p">},</span> <span class="mi">4326</span><span class="p">)</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">POLYGON</span> <span class="p">((</span><span class="mf">37.279357</span> <span class="mf">55.849493</span><span class="p">,</span> <span class="mf">37.275152</span> <span class="mf">55.865005</span><span class="p">,</span> <span class="mf">37.261676</span> <span class="mf">55.864041</span><span class="p">,</span> <span class="mf">37.279357</span>
+  <span class="mf">55.849493</span><span class="p">))</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">polygon</span><span class="p">:</span><span class="n">exteriorring</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">LINEARRING</span> <span class="p">(</span><span class="mf">37.279357</span> <span class="mf">55.849493</span><span class="p">,</span> <span class="mf">37.275152</span> <span class="mf">55.865005</span><span class="p">,</span> <span class="mf">37.261676</span> <span class="mf">55.864041</span><span class="p">,</span> <span class="mf">37.279357</span>
+  <span class="mf">55.849493</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.ExteriorRing">
+<code class="descclassname">ST.</code><code class="descname">ExteriorRing</code><span class="sig-paren">(</span><em>polygon</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.ExteriorRing" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a SQL/MM-compatible alias for <a class="reference internal" href="#gis.Polygon.exteriorring" title="gis.Polygon.exteriorring"><code class="xref py py-func docutils literal"><span class="pre">Polygon.exteriorring()</span></code></a>.
+SQL-MM 3: 8.2.3.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Polygon.numholes">
+<code class="descclassname">Polygon.</code><code class="descname">numholes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Polygon.numholes" title="Permalink to this definition">¶</a></dt>
+<dt id="gis.Polygon.numinteriorrings">
+<code class="descclassname">Polygon.</code><code class="descname">numinteriorrings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Polygon.numinteriorrings" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">return the number of interior rings of a polygon</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">integer</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the number of interior rings of a polygon.</p>
+<p>This method implements OpenGIS® Simple Feature Access specification.
+OGC 06-103r4 6.1.11.2.</p>
+<p>See <a class="reference internal" href="#gis.Polygon.hole" title="gis.Polygon.hole"><code class="xref py py-func docutils literal"><span class="pre">Polygon.hole()</span></code></a> for examples.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.NumInteriorRings">
+<code class="descclassname">ST.</code><code class="descname">NumInteriorRings</code><span class="sig-paren">(</span><em>polygon</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.NumInteriorRings" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a SQL/MM-compatible alias for
+<a class="reference internal" href="#gis.Polygon.numinteriorrings" title="gis.Polygon.numinteriorrings"><code class="xref py py-func docutils literal"><span class="pre">Polygon.numinteriorrings()</span></code></a>. SQL-MM 3: 8.2.5.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Polygon.hole">
+<code class="descclassname">Polygon.</code><code class="descname">hole</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.Polygon.hole" title="Permalink to this definition">¶</a></dt>
+<dt id="gis.Polygon.interiorring">
+<code class="descclassname">Polygon.</code><code class="descname">interiorring</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.Polygon.interiorring" title="Permalink to this definition">¶</a></dt>
+<dt id="gis.Polygon.interiorringn">
+<code class="descclassname">Polygon.</code><code class="descname">interiorringn</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.Polygon.interiorringn" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<em>integer</em>) &#8211; one-based index</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Nth interior ring of a polygon</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="types.html#gis.LinearRing" title="gis.LinearRing">LinearRing</a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns Nth interior ring of a polygon. Returns nil if n is out of
+bounds.</p>
+<p>This method implements OpenGIS® Simple Feature Access specification.
+OGC 06-103r4 6.1.11.2.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">shell</span> <span class="o">=</span> <span class="p">{</span>
+         <span class="o">&gt;</span>     <span class="p">{</span><span class="mf">37.279357</span><span class="p">,</span> <span class="mf">55.849493</span><span class="p">};</span>
+         <span class="o">&gt;</span>     <span class="p">{</span><span class="mf">37.275152</span><span class="p">,</span> <span class="mf">55.865005</span><span class="p">};</span>
+         <span class="o">&gt;</span>     <span class="p">{</span><span class="mf">37.261676</span><span class="p">,</span> <span class="mf">55.864041</span><span class="p">};</span>
+         <span class="o">&gt;</span>     <span class="p">{</span><span class="mf">37.279357</span><span class="p">,</span> <span class="mf">55.849493</span><span class="p">};</span>
+         <span class="o">&gt;</span> <span class="p">}</span>
+<span class="c1">---</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">hole</span> <span class="o">=</span> <span class="p">{</span>
+         <span class="o">&gt;</span>     <span class="p">{</span><span class="mf">37.267856</span><span class="p">,</span> <span class="mf">55.853781</span><span class="p">};</span>
+         <span class="o">&gt;</span>     <span class="p">{</span><span class="mf">37.269401</span><span class="p">,</span> <span class="mf">55.858502</span><span class="p">};</span>
+         <span class="o">&gt;</span>     <span class="p">{</span><span class="mf">37.273864</span><span class="p">,</span> <span class="mf">55.854937</span><span class="p">};</span>
+         <span class="o">&gt;</span>     <span class="p">{</span><span class="mf">37.267856</span><span class="p">,</span> <span class="mf">55.853781</span><span class="p">};</span>
+         <span class="o">&gt;</span> <span class="p">}</span>
+<span class="c1">---</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">Polygon</span><span class="p">({</span><span class="n">shell</span><span class="p">,</span> <span class="n">hole</span><span class="p">},</span> <span class="mi">4326</span><span class="p">)</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">POLYGON</span> <span class="p">((</span><span class="mf">37.279357</span> <span class="mf">55.849493</span><span class="p">,</span> <span class="mf">37.275152</span> <span class="mf">55.865005</span><span class="p">,</span> <span class="mf">37.261676</span> <span class="mf">55.864041</span><span class="p">,</span> <span class="mf">37.279357</span>
+  <span class="mf">55.849493</span><span class="p">),</span> <span class="p">(</span><span class="mf">37.267856</span> <span class="mf">55.853781</span><span class="p">,</span> <span class="mf">37.269401</span> <span class="mf">55.858502</span><span class="p">,</span> <span class="mf">37.273864</span> <span class="mf">55.854937</span><span class="p">,</span> <span class="mf">37.267856</span>
+  <span class="mf">55.853781</span><span class="p">))</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">polygon</span><span class="p">:</span><span class="n">numholes</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="mi">1</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">polygon</span><span class="p">:</span><span class="n">hole</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">LINEARRING</span> <span class="p">(</span><span class="mf">37.267856</span> <span class="mf">55.853781</span><span class="p">,</span> <span class="mf">37.269401</span> <span class="mf">55.858502</span><span class="p">,</span> <span class="mf">37.273864</span> <span class="mf">55.854937</span><span class="p">,</span> <span class="mf">37.267856</span>
+  <span class="mf">55.853781</span><span class="p">)</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">polygon</span><span class="p">:</span><span class="n">hole</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">null</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.InteriorRingN">
+<code class="descclassname">ST.</code><code class="descname">InteriorRingN</code><span class="sig-paren">(</span><em>polygon</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.InteriorRingN" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a SQL/MM-compatible alias for
+<a class="reference internal" href="#gis.Polygon.interiorringn" title="gis.Polygon.interiorringn"><code class="xref py py-func docutils literal"><span class="pre">Polygon.interiorringn()</span></code></a>. SQL-MM 3: 8.2.6.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Polygon.holes">
+<code class="descclassname">Polygon.</code><code class="descname">holes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Polygon.holes" title="Permalink to this definition">¶</a></dt>
+<dt id="gis.Polygon.interiorrings">
+<code class="descclassname">Polygon.</code><code class="descname">interiorrings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Polygon.interiorrings" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">array of interior rings of a polygon</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">[LinearRing]</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">on error</td>
+</tr>
+</tbody>
+</table>
+<p>Returns a Lua table with interior rings of this polygon.</p>
+<p>See also <a class="reference internal" href="#gis.Polygon.iterholes" title="gis.Polygon.iterholes"><code class="xref py py-func docutils literal"><span class="pre">Polygon.iterholes()</span></code></a> and <a class="reference internal" href="#gis.Polygon.hole" title="gis.Polygon.hole"><code class="xref py py-func docutils literal"><span class="pre">Polygon.hole()</span></code></a>.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">polygon</span><span class="p">:</span><span class="n">holes</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="o">-</span> <span class="n">LINEARRING</span> <span class="p">(</span><span class="mf">37.267856</span> <span class="mf">55.853781</span><span class="p">,</span> <span class="mf">37.269401</span> <span class="mf">55.858502</span><span class="p">,</span> <span class="mf">37.273864</span> <span class="mf">55.854937</span><span class="p">,</span> <span class="mf">37.267856</span>
+    <span class="mf">55.853781</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Polygon.iterholes">
+<code class="descclassname">Polygon.</code><code class="descname">iterholes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Polygon.iterholes" title="Permalink to this definition">¶</a></dt>
+<dt id="gis.Polygon.iterinteriorrings">
+<code class="descclassname">Polygon.</code><code class="descname">iterinteriorrings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Polygon.iterinteriorrings" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">iterator over interior rings of this polygon</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Lua iterator (gen, param, state)</td>
+</tr>
+</tbody>
+</table>
+<p>Returns a Lua iterator (gen, param, state) over interior rings of this
+polygon.</p>
+<p>See also <a class="reference internal" href="#gis.Polygon.holes" title="gis.Polygon.holes"><code class="xref py py-func docutils literal"><span class="pre">Polygon.holes()</span></code></a> and <a class="reference internal" href="#gis.Polygon.hole" title="gis.Polygon.hole"><code class="xref py py-func docutils literal"><span class="pre">Polygon.hole()</span></code></a>.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">hole</span> <span class="k">in</span> <span class="n">polygon</span><span class="p">:</span><span class="n">iterholes</span><span class="p">()</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">hole</span><span class="p">)</span> <span class="k">end</span>
+<span class="mi">1</span>       <span class="n">LINEARRING</span> <span class="p">(</span><span class="mf">37.267856</span> <span class="mf">55.853781</span><span class="p">,</span> <span class="mf">37.269401</span> <span class="mf">55.858502</span><span class="p">,</span> <span class="mf">37.273864</span> <span class="mf">55.854937</span><span class="p">,</span> <span class="mf">37.267856</span> <span class="mf">55.853781</span><span class="p">)</span>
+<span class="c1">---</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.GeometryCollection.numgeometries">
+<code class="descclassname">GeometryCollection.</code><code class="descname">numgeometries</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.GeometryCollection.numgeometries" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the number of geometries in the collection</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">on error</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the number of geometries in this GeometryCollection.
+This method also supports non-collections geometric types.</p>
+<p>This method implements OpenGIS® Simple Feature Access specification.
+OGC 06-103r4 6.1.3.2.</p>
+<p>See <a class="reference internal" href="#gis.GeometryCollection.geometryn" title="gis.GeometryCollection.geometryn"><code class="xref py py-meth docutils literal"><span class="pre">GeometryCollection.geometryn()</span></code></a> for examples.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.NumGeometries">
+<code class="descclassname">ST.</code><code class="descname">NumGeometries</code><span class="sig-paren">(</span><em>collection</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.NumGeometries" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a SQL/MM-compatible alias for
+<code class="xref py py-func docutils literal"><span class="pre">GeometryCollection.NumGeometries()</span></code>. SQL-MM 3: 9.1.4.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.GeometryCollection.geometry">
+<code class="descclassname">GeometryCollection.</code><code class="descname">geometry</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.GeometryCollection.geometry" title="Permalink to this definition">¶</a></dt>
+<dt id="gis.GeometryCollection.geometryn">
+<code class="descclassname">GeometryCollection.</code><code class="descname">geometryn</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.GeometryCollection.geometryn" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>n</strong> (<em>integer</em>) &#8211; one-based index</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">idx-geometry of a collection</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="types.html#gis.Geometry" title="gis.Geometry">Geometry</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body">on error</td>
+</tr>
+</tbody>
+</table>
+<p>Returns Nth-geometry of this collection. Returns nil if n is out of
+bounds. This method also supports non-collections geometric types.</p>
+<p>This method implements OpenGIS® Simple Feature Access specification.
+OGC 06-103r4 6.1.3.2.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">collection</span> <span class="o">=</span> <span class="n">gis</span><span class="p">.</span><span class="n">MultiPoint</span><span class="p">({{</span><span class="mf">37.279357</span><span class="p">,</span> <span class="mf">55.849493</span><span class="p">},</span> <span class="p">{</span><span class="mf">37.275152</span><span class="p">,</span> <span class="mf">55.865005</span><span class="p">}},</span> <span class="mi">4326</span><span class="p">)</span>
+<span class="c1">---</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">collection</span><span class="p">:</span><span class="n">numgeometries</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="mi">2</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">collection</span><span class="p">:</span><span class="n">geometryn</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">POINT</span> <span class="p">(</span><span class="mf">37.279357</span> <span class="mf">55.849493</span><span class="p">)</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">collection</span><span class="p">:</span><span class="n">geometryn</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">null</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">collection</span><span class="p">:</span><span class="n">geometries</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="o">-</span> <span class="n">POINT</span> <span class="p">(</span><span class="mf">37.279357</span> <span class="mf">55.849493</span><span class="p">)</span>
+  <span class="o">-</span> <span class="n">POINT</span> <span class="p">(</span><span class="mf">37.275152</span> <span class="mf">55.865005</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">geom</span> <span class="k">in</span> <span class="n">collection</span><span class="p">:</span><span class="n">itergeometries</span><span class="p">()</span> <span class="k">do</span> <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span> <span class="k">end</span>
+<span class="mi">1</span>       <span class="n">POINT</span> <span class="p">(</span><span class="mf">37.279357</span> <span class="mf">55.849493</span><span class="p">)</span>
+<span class="mi">2</span>       <span class="n">POINT</span> <span class="p">(</span><span class="mf">37.275152</span> <span class="mf">55.865005</span><span class="p">)</span>
+<span class="c1">---</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.GeometryN">
+<code class="descclassname">ST.</code><code class="descname">GeometryN</code><span class="sig-paren">(</span><em>collection</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.GeometryN" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a SQL/MM-compatible alias for
+<a class="reference internal" href="#gis.GeometryCollection.geometryn" title="gis.GeometryCollection.geometryn"><code class="xref py py-func docutils literal"><span class="pre">GeometryCollection.geometryn()</span></code></a>. SQL-MM 3: 9.1.5.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.GeometryCollection.geometries">
+<code class="descclassname">GeometryCollection.</code><code class="descname">geometries</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.GeometryCollection.geometries" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">array of geometries of this collection</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">[Geometry]</td>
+</tr>
+</tbody>
+</table>
+<p>Returns a Lua table with geometries of this collection. This method
+also supports non-collections geometric types.</p>
+<p>See also <a class="reference internal" href="#gis.GeometryCollection.geometry" title="gis.GeometryCollection.geometry"><code class="xref py py-func docutils literal"><span class="pre">GeometryCollection.geometry()</span></code></a> for examples.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.Dump">
+<code class="descclassname">ST.</code><code class="descname">Dump</code><span class="sig-paren">(</span><em>collection</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.Dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a PostGIS-compatible alias for
+<a class="reference internal" href="#gis.GeometryCollection.geometries" title="gis.GeometryCollection.geometries"><code class="xref py py-func docutils literal"><span class="pre">GeometryCollection.geometries()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.GeometryCollection.itergeometries">
+<code class="descclassname">GeometryCollection.</code><code class="descname">itergeometries</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.GeometryCollection.itergeometries" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">iterator over geometries in this collection</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Lua iterator (gen, param, state)</td>
+</tr>
+</tbody>
+</table>
+<p>Returns a Lua iterator (gen, param, state) over geometries of this
+collection.</p>
+<p>See also <a class="reference internal" href="#gis.GeometryCollection.geometry" title="gis.GeometryCollection.geometry"><code class="xref py py-func docutils literal"><span class="pre">GeometryCollection.geometry()</span></code></a> for examples.</p>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="types.html">Types</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="relationships.html">Relationships</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Roman Tsisyk.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

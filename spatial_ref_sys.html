@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Spatial Reference Systems &mdash; Tarantool GIS 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Tarantool GIS 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="Types" href="types.html" />
+    <link rel="prev" title="Getting Started" href="getting_started.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>Tarantool GIS 0.1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Spatial Reference Systems</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="getting_started.html">Getting Started</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="types.html">Types</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="spatial-reference-systems">
+<h1>Spatial Reference Systems<a class="headerlink" href="#spatial-reference-systems" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal"><span class="pre">spatial_ref_sys</span></code> table is an OGC compliant database table that lists over
+5000 known spatial reference systems and details needed to transform/reproject
+between them.</p>
+<p>Although the <code class="docutils literal"><span class="pre">spatial_ref_sys</span></code> table contains over 5000 of the more commonly
+used spatial reference system definitions that can be handled by the PROJ4
+library, it does not contain all known to man and you can even define your
+own custom projection if you are familiar with proj4 constructs. Keep in mind
+that most spatial reference systems are regional and have no meaning when used
+outside of the bounds they were intended for. Please read the great
+<a class="reference external" href="https://source.opennews.org/en-US/learning/choosing-right-map-projection/">&#8220;Choosing the Right Map Projection&#8221;</a>
+article if you are newbie.</p>
+<p>An excellent resource for finding spatial reference systems not defined in
+the core set is <a class="reference external" href="http://spatialreference.org/">http://spatialreference.org/</a></p>
+<p>Some of the more commonly used spatial reference systems are:</p>
+<ul class="simple">
+<li>4326 - WGS84 Long Lat</li>
+<li>4328 - WGS84 GeoCentered (3D)</li>
+<li>4269 - NAD 83 Long Lat</li>
+<li>3395 - WGS 84 World Mercator</li>
+<li>2163 - US National Atlas Equal Area,</li>
+<li>WGS84 UTM zones are one of the most ideal for measurement, but only cover
+6-degree regions.</li>
+</ul>
+<p>Various US state plane spatial reference systems (meter or feet based) -
+usually one or 2 exists per US state. Most of the meter ones are in the core
+set, but many of the feet based ones or ESRI created ones you will need to pull
+from <a class="reference external" href="http://spatialreference.org/">http://spatialreference.org/</a>.</p>
+<div class="figure">
+<img alt="The USA four ways" src="_images/srs.jpg" />
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="getting_started.html">Getting Started</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="types.html">Types</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Roman Tsisyk.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

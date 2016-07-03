@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting Started &mdash; Tarantool GIS 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Tarantool GIS 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="Spatial Reference Systems" href="spatial_ref_sys.html" />
+    <link rel="prev" title="Introduction" href="intro.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>Tarantool GIS 0.1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Getting Started</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="intro.html">Introduction</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="spatial_ref_sys.html">Spatial Reference Systems</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>Please jump to <a class="reference internal" href="#using-the-software">Using the Software</a> section if you are familiar with
+Tarantool.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>This software is a <a class="reference external" href="http://rocks.tarantool.org/">module</a> for <a class="reference external" href="http://tarantool.org/">Tarantool Database</a>.
+Tarantool 1.6.8 or newer is recommended.</p>
+<p><strong>Tarantool/GIS</strong> depends on the following third-party libraries:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://trac.osgeo.org/geos/">GEOS</a> (&gt;= 3.4.0) - Geometry Engine - Open Source.</li>
+<li><a class="reference external" href="https://github.com/OSGeo/proj.4">proj4</a> (&gt;= 4.8) - cartographic projection software.</li>
+</ul>
+</div>
+<div class="section" id="installing-geos-and-proj-4">
+<h2>Installing GEOS and PROJ.4<a class="headerlink" href="#installing-geos-and-proj-4" title="Permalink to this headline">¶</a></h2>
+<p>Use the following command on Debian-based distros:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sudo apt-get instal libgeos-dev libproj-dev <span class="c1"># Debian/Ubuntu</span>
+</pre></div>
+</div>
+<p>Use the following command on RPM-based distros:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sudo yum install geos-devel proj-devel <span class="c1"># Fedora/RHEL/CentOS</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-tarantool-and-tarantool-gis">
+<h2>Installing Tarantool and Tarantool/GIS<a class="headerlink" href="#installing-tarantool-and-tarantool-gis" title="Permalink to this headline">¶</a></h2>
+<p>Please install Tarantool using packages for your distribution
+from <a class="reference external" href="http://tarantool.org/">http://tarantool.org/</a>.</p>
+<p><strong>Tarantool/GIS</strong> also can be installed from the same repositories using
+<code class="docutils literal"><span class="pre">tarantool-gis</span></code> name.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sudo apt-get install tarantool-gis <span class="c1"># Debian/Ubuntu</span>
+</pre></div>
+</div>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>sudo yum install tarantool-gis <span class="c1"># Fedora/RHEL/CentOS</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-the-software">
+<h2>Using the Software<a class="headerlink" href="#using-the-software" title="Permalink to this headline">¶</a></h2>
+<p>Ensure that freshly installed Tarantool works:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>$ tarantool
+tarantool: version 1.6.8-701-g599ddf2
+<span class="nb">type</span> <span class="s1">&#39;help&#39;</span> <span class="k">for</span> interactive <span class="nb">help</span>
+tarantool&gt; box.cfg<span class="o">({</span> <span class="nv">logger</span> <span class="o">=</span> <span class="s1">&#39;tarantool.log&#39;</span> <span class="o">})</span>
+<span class="o">[</span>CUT<span class="o">]</span>
+tarantool&gt; <span class="nv">gis</span> <span class="o">=</span> require<span class="o">(</span><span class="s1">&#39;gis&#39;</span><span class="o">)</span>
+---
+...
+tarantool&gt; gis.install<span class="o">()</span>
+---
+...
+</pre></div>
+</div>
+<p><code class="xref py py-func docutils literal"><span class="pre">gis.install()</span></code> function will create <cite>spatial_ref_sys</cite> and other system
+tables in Tarantool.</p>
+<p>Now you can use <strong>Tarantool/GIS</strong>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>tarantool&gt; <span class="nv">point</span> <span class="o">=</span> gis.Point<span class="o">({</span>37.17284, 55.74495<span class="o">}</span>, 4326<span class="o">)</span>
+tarantool&gt; point
+---
+- POINT <span class="o">(</span>37.17284 55.74495<span class="o">)</span> <span class="c1"># WKT (for humans)</span>
+...
+
+tarantool&gt; point:hex<span class="o">()</span>
+---
+- 010100000067B8019F1F964240DE9387855ADF4B40 <span class="c1"># WKB HEX (for PostGIS users)</span>
+...
+
+tarantool&gt; point:table<span class="o">()</span>
+---
+- <span class="o">[</span>37.17284, 55.74495<span class="o">]</span> <span class="c1"># Lua Tables</span>
+- 4326
+...
+
+tarantool&gt; box.space.spatial_ref_sys:get<span class="o">(</span>4326<span class="o">)[</span>4<span class="o">]</span>
+---
+- GEOGCS<span class="o">[</span><span class="s2">&quot;WGS 84&quot;</span>,DATUM<span class="o">[</span><span class="s2">&quot;WGS_1984&quot;</span>,SPHEROID<span class="o">[</span><span class="s2">&quot;WGS 84&quot;</span>,6378137,298.257223563,AUTHORITY<span class="o">[</span><span class="s2">&quot;EPSG&quot;</span>,<span class="s2">&quot;7030&quot;</span><span class="o">]]</span>,AUTHORITY<span class="o">[</span><span class="s2">&quot;EPSG&quot;</span>,<span class="s2">&quot;6326&quot;</span><span class="o">]]</span>,PRIMEM<span class="o">[</span><span class="s2">&quot;Greenwich&quot;</span>,0,AUTHORITY<span class="o">[</span><span class="s2">&quot;EPSG&quot;</span>,<span class="s2">&quot;8901&quot;</span><span class="o">]]</span>,UNIT<span class="o">[</span><span class="s2">&quot;degree&quot;</span>,0.0174532925199433,AUTHORITY<span class="o">[</span><span class="s2">&quot;EPSG&quot;</span>,<span class="s2">&quot;9122&quot;</span><span class="o">]]</span>,AUTHORITY<span class="o">[</span><span class="s2">&quot;EPSG&quot;</span>,<span class="s2">&quot;4326&quot;</span><span class="o">]]</span>
+...
+</pre></div>
+</div>
+</div>
+<div class="section" id="further-actions">
+<h2>Further Actions<a class="headerlink" href="#further-actions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Read <a class="reference internal" href="accessors.html"><em>Accessors</em></a> and <a class="reference internal" href="relationships.html"><em>Relationships</em></a> sections.</li>
+<li>Use <a class="reference internal" href="genindex.html"><span>Index</span></a> to find functions by its names.</li>
+<li>Checkout <strong>examples</strong> from
+<a class="reference external" href="https://github.com/tarantool/gis/tree/master/tests">tests/</a> directory</li>
+<li>&#8220;Star&#8221; us the on <a class="reference external" href="http://github.com/tarantool/gis">GitHub</a> and share for friends on <a class="reference external" href="https://www.facebook.com/sharer/sharer.php?u=http%3A//github.com/tarantool/gis">Facebook</a></li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="intro.html">Introduction</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="spatial_ref_sys.html">Spatial Reference Systems</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Roman Tsisyk.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

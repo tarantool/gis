@@ -1,0 +1,401 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Conversions &mdash; Tarantool GIS 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Tarantool GIS 0.1.0 documentation" href="index.html" />
+    <link rel="prev" title="Transformations" href="transformations.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>Tarantool GIS 0.1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Conversions</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="transformations.html">Transformations</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="module-gis">
+<span id="conversions"></span><h1>Conversions<a class="headerlink" href="#module-gis" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">SQL/MM</th>
+<th class="head">Lua</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#gis.ST.GeomFromWKT" title="gis.ST.GeomFromWKT"><code class="xref py py-func docutils literal"><span class="pre">ST.GeomFromWKT()</span></code></a></td>
+<td><a class="reference internal" href="#gis.wkt.decode" title="gis.wkt.decode"><code class="xref py py-func docutils literal"><span class="pre">wkt.decode()</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gis.ST.AsWKT" title="gis.ST.AsWKT"><code class="xref py py-func docutils literal"><span class="pre">ST.AsWKT()</span></code></a></td>
+<td><a class="reference internal" href="#gis.wkt.encode" title="gis.wkt.encode"><code class="xref py py-func docutils literal"><span class="pre">wkt.encode()</span></code></a>
+<a class="reference internal" href="#gis.Geometry.wkt" title="gis.Geometry.wkt"><code class="xref py py-func docutils literal"><span class="pre">Geometry.wkt()</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gis.ST.GeomFromWKB" title="gis.ST.GeomFromWKB"><code class="xref py py-func docutils literal"><span class="pre">ST.GeomFromWKB()</span></code></a></td>
+<td><a class="reference internal" href="#gis.wkb.decode" title="gis.wkb.decode"><code class="xref py py-func docutils literal"><span class="pre">wkb.decode()</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gis.ST.AsWKB" title="gis.ST.AsWKB"><code class="xref py py-func docutils literal"><span class="pre">ST.AsWKB()</span></code></a></td>
+<td><a class="reference internal" href="#gis.wkb.encode" title="gis.wkb.encode"><code class="xref py py-func docutils literal"><span class="pre">wkb.encode()</span></code></a>
+<a class="reference internal" href="#gis.Geometry.wkb" title="gis.Geometry.wkb"><code class="xref py py-func docutils literal"><span class="pre">Geometry.wkb()</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gis.ST.GeomFromHEXWKB" title="gis.ST.GeomFromHEXWKB"><code class="xref py py-func docutils literal"><span class="pre">ST.GeomFromHEXWKB()</span></code></a></td>
+<td><a class="reference internal" href="#gis.wkb.decode_hex" title="gis.wkb.decode_hex"><code class="xref py py-func docutils literal"><span class="pre">wkb.decode_hex()</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gis.ST.AsHEXWKB" title="gis.ST.AsHEXWKB"><code class="xref py py-func docutils literal"><span class="pre">ST.AsHEXWKB()</span></code></a></td>
+<td><a class="reference internal" href="#gis.wkb.encode_hex" title="gis.wkb.encode_hex"><code class="xref py py-func docutils literal"><span class="pre">wkb.encode_hex()</span></code></a>
+<a class="reference internal" href="#gis.Geometry.hexwkb" title="gis.Geometry.hexwkb"><code class="xref py py-func docutils literal"><span class="pre">Geometry.hexwkb()</span></code></a>
+<a class="reference internal" href="#gis.Geometry.hex" title="gis.Geometry.hex"><code class="xref py py-func docutils literal"><span class="pre">Geometry.hex()</span></code></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gis.ST.AsTable" title="gis.ST.AsTable"><code class="xref py py-func docutils literal"><span class="pre">ST.AsTable()</span></code></a></td>
+<td><a class="reference internal" href="#gis.Geometry.table" title="gis.Geometry.table"><code class="xref py py-func docutils literal"><span class="pre">Geometry.table()</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="gis.wkt.decode">
+<code class="descclassname">wkt.</code><code class="descname">decode</code><span class="sig-paren">(</span><em>wkt</em>, <em>srid</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.wkt.decode" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>wkt</strong> (<em>string</em>) &#8211; Well-Known Text</li>
+<li><strong>srid</strong> (<em>uint</em>) &#8211; Spatial Reference System Identifier</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a new geometry</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="types.html#gis.Geometry" title="gis.Geometry">Geometry</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Constructs Geometry from Well-Known Text (WKT).</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">wkt</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">POINT (37.17284 55.74495)&#39;</span><span class="p">,</span> <span class="mi">4326</span><span class="p">)</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">POINT</span> <span class="p">(</span><span class="mf">37.17284</span> <span class="mf">55.74495</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.GeomFromWKT">
+<code class="descclassname">ST.</code><code class="descname">GeomFromWKT</code><span class="sig-paren">(</span><em>wkt</em>, <em>srid</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.GeomFromWKT" title="Permalink to this definition">¶</a></dt>
+<dt id="gis.ST.GeomFromText">
+<code class="descclassname">ST.</code><code class="descname">GeomFromText</code><span class="sig-paren">(</span><em>wkt</em>, <em>srid</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.GeomFromText" title="Permalink to this definition">¶</a></dt>
+<dd><p>These function are PostGIS-compatible aliases for <a class="reference internal" href="#gis.wkt.decode" title="gis.wkt.decode"><code class="xref py py-func docutils literal"><span class="pre">wkt.decode()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.wkt.encode">
+<code class="descclassname">wkt.</code><code class="descname">encode</code><span class="sig-paren">(</span><em>geometry</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.wkt.encode" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>geometry</strong> (<a class="reference internal" href="types.html#gis.Geometry" title="gis.Geometry"><em>Geometry</em></a>) &#8211; geometry</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Well-Known Text</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>Return the Well-Known Text (WKT) representation of the geometry.
+These function lose SRID information.</p>
+<p>WKT format does not maintain precision so please use WKB to prevent
+floating truncation.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">point</span> <span class="o">=</span> <span class="n">gis</span><span class="p">.</span><span class="n">Point</span><span class="p">({</span><span class="mf">37.17284</span><span class="p">,</span> <span class="mf">55.74495</span><span class="p">},</span> <span class="mi">4326</span><span class="p">)</span>
+<span class="c1">---</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">point</span><span class="p">:</span><span class="n">wkt</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">POINT</span> <span class="p">(</span><span class="mf">37.17284</span> <span class="mf">55.74495</span><span class="p">)</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="nb">tostring</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">POINT</span> <span class="p">(</span><span class="mf">37.17284</span> <span class="mf">55.74495</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Geometry.wkt">
+<code class="descclassname">Geometry.</code><code class="descname">wkt</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Geometry.wkt" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#gis.wkt.encode" title="gis.wkt.encode"><code class="xref py py-func docutils literal"><span class="pre">wkt.encode()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.AsWKT">
+<code class="descclassname">ST.</code><code class="descname">AsWKT</code><span class="sig-paren">(</span><em>geometry</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.AsWKT" title="Permalink to this definition">¶</a></dt>
+<dt id="gis.ST.AsText">
+<code class="descclassname">ST.</code><code class="descname">AsText</code><span class="sig-paren">(</span><em>geometry</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.AsText" title="Permalink to this definition">¶</a></dt>
+<dd><p>These function are PostGIS-compatible aliases for <a class="reference internal" href="#gis.wkt.encode" title="gis.wkt.encode"><code class="xref py py-func docutils literal"><span class="pre">wkt.encode()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.wkb.decode">
+<code class="descclassname">wkb.</code><code class="descname">decode</code><span class="sig-paren">(</span><em>wkb</em>, <em>srid</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.wkb.decode" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>wkt</strong> (<em>string</em>) &#8211; Well-Known Binary</li>
+<li><strong>srid</strong> (<em>uint</em>) &#8211; Spatial Reference System Identifier</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a new geometry</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="types.html#gis.Geometry" title="gis.Geometry">Geometry</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Constructs Geometry from Well-Known Binary (WKB).</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">wkb</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">\x01\x01\x00\x00\x00\x67\xB8\x01\x9F\x1F\x96\x42\x40\xDE\x93\x87\x85\x5A\xDF\x4B\x40&quot;</span>
+<span class="c1">---</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">wkb</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">wkb</span><span class="p">,</span> <span class="mi">4326</span><span class="p">)</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">POINT</span> <span class="p">(</span><span class="mf">37.17284</span> <span class="mf">55.74495</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.GeomFromWKB">
+<code class="descclassname">ST.</code><code class="descname">GeomFromWKB</code><span class="sig-paren">(</span><em>wkb</em>, <em>srid</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.GeomFromWKB" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">ST.</code><code class="descname">GeomFromText</code><span class="sig-paren">(</span><em>wkb</em>, <em>srid</em><span class="sig-paren">)</span></dt>
+<dd><p>These function are PostGIS-compatible aliases for <a class="reference internal" href="#gis.wkb.decode" title="gis.wkb.decode"><code class="xref py py-func docutils literal"><span class="pre">wkb.decode()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.wkb.decode_hex">
+<code class="descclassname">wkb.</code><code class="descname">decode_hex</code><span class="sig-paren">(</span><em>hexwkb</em>, <em>srid</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.wkb.decode_hex" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>hexwkb</strong> (<em>string</em>) &#8211; Well-Known Binary as HEX</li>
+<li><strong>srid</strong> (<em>uint</em>) &#8211; Spatial Reference System Identifier</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a new geometry</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="types.html#gis.Geometry" title="gis.Geometry">Geometry</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Constructs Geometry from Well-Known Binary (WKB) encoded as HEX.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">hexwkb</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">010100000067B8019F1F964240DE9387855ADF4B40&quot;</span>
+<span class="c1">---</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">wkb</span><span class="p">.</span><span class="n">decode_hex</span><span class="p">(</span><span class="n">hexwkb</span><span class="p">,</span> <span class="mi">4326</span><span class="p">)</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">POINT</span> <span class="p">(</span><span class="mf">37.17284</span> <span class="mf">55.74495</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.GeomFromHEXWKB">
+<code class="descclassname">ST.</code><code class="descname">GeomFromHEXWKB</code><span class="sig-paren">(</span><em>hexwkb</em>, <em>srid</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.GeomFromHEXWKB" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is an alias for <a class="reference internal" href="#gis.wkb.decode_hex" title="gis.wkb.decode_hex"><code class="xref py py-func docutils literal"><span class="pre">wkb.decode_hex()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.wkb.encode">
+<code class="descclassname">wkb.</code><code class="descname">encode</code><span class="sig-paren">(</span><em>geometry</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.wkb.encode" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>geometry</strong> (<a class="reference internal" href="types.html#gis.Geometry" title="gis.Geometry"><em>Geometry</em></a>) &#8211; geometry</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Well-Known Binary</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>Return the Well-Known Binary (WKB) representation of the geometry.
+These function lose SRID information.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span>tarantool&gt; point:wkb()
+---
+- !!binary AQEAAABnuAGfH5ZCQN6Th4Va30tA
+...
+
+tarantool&gt; point:hexwkb()
+---
+- 010100000067B8019F1F964240DE9387855ADF4B40
+...
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.wkb.encode_hex">
+<code class="descclassname">wkb.</code><code class="descname">encode_hex</code><span class="sig-paren">(</span><em>geometry</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.wkb.encode_hex" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>geometry</strong> (<a class="reference internal" href="types.html#gis.Geometry" title="gis.Geometry"><em>Geometry</em></a>) &#8211; geometry</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Well-Known Binary (WKB) encoded as HEX</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>Return the Well-Known Binary (WKB) representation of the geometry
+encoded as HEX string.</p>
+<p>These function lose SRID information.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">point</span><span class="p">:</span><span class="n">hexwkb</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="mi">010100000067</span><span class="n">B8019F1F964240DE9387855ADF4B40</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Geometry.wkb">
+<code class="descclassname">Geometry.</code><code class="descname">wkb</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Geometry.wkb" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alias for <a class="reference internal" href="#gis.wkb.encode" title="gis.wkb.encode"><code class="xref py py-func docutils literal"><span class="pre">wkb.encode()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Geometry.hexwkb">
+<code class="descclassname">Geometry.</code><code class="descname">hexwkb</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Geometry.hexwkb" title="Permalink to this definition">¶</a></dt>
+<dt id="gis.Geometry.hex">
+<code class="descclassname">Geometry.</code><code class="descname">hex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Geometry.hex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aliases for <a class="reference internal" href="#gis.wkb.encode_hex" title="gis.wkb.encode_hex"><code class="xref py py-func docutils literal"><span class="pre">wkb.encode_hex()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.AsWKB">
+<code class="descclassname">ST.</code><code class="descname">AsWKB</code><span class="sig-paren">(</span><em>geometry</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.AsWKB" title="Permalink to this definition">¶</a></dt>
+<dt id="gis.ST.AsBinary">
+<code class="descclassname">ST.</code><code class="descname">AsBinary</code><span class="sig-paren">(</span><em>geometry</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.AsBinary" title="Permalink to this definition">¶</a></dt>
+<dd><p>These function are PostGIS-compatible aliases for <a class="reference internal" href="#gis.wkb.encode" title="gis.wkb.encode"><code class="xref py py-func docutils literal"><span class="pre">wkb.encode()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.AsHEXWKB">
+<code class="descclassname">ST.</code><code class="descname">AsHEXWKB</code><span class="sig-paren">(</span><em>geometry</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.AsHEXWKB" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is an alias for <a class="reference internal" href="#gis.wkb.encode_hex" title="gis.wkb.encode_hex"><code class="xref py py-func docutils literal"><span class="pre">wkb.encode_hex()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gis.Geometry.table">
+<code class="descclassname">Geometry.</code><code class="descname">table</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Geometry.table" title="Permalink to this definition">¶</a></dt>
+<dt id="gis.Geometry.totable">
+<code class="descclassname">Geometry.</code><code class="descname">totable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gis.Geometry.totable" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Lua Table suitable for constructor</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#gis.Geometry.table" title="gis.Geometry.table">table</a></td>
+</tr>
+</tbody>
+</table>
+<p>Returns <code class="docutils literal"><span class="pre">table,</span> <span class="pre">srid</span></code> suitable for a constructor of appropriate type.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">Point</span><span class="p">({</span><span class="mf">37.17284</span><span class="p">,</span> <span class="mf">55.74495</span><span class="p">},</span> <span class="mi">4326</span><span class="p">):</span><span class="n">totable</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="p">[</span><span class="mf">37.17284</span><span class="p">,</span> <span class="mf">55.74495</span><span class="p">]</span>
+<span class="o">-</span> <span class="mi">4326</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">LineString</span><span class="p">({{</span><span class="mf">37.279357</span><span class="p">,</span> <span class="mf">55.849493</span><span class="p">},</span> <span class="p">{</span><span class="mf">37.275152</span><span class="p">,</span> <span class="mf">55.865005</span><span class="p">}},</span> <span class="mi">4326</span><span class="p">):</span><span class="n">totable</span><span class="p">()</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="s">[[37.279357, 55.849493], [37.275152, 55.865005]]</span>
+<span class="o">-</span> <span class="mi">4326</span>
+<span class="o">...</span>
+
+<span class="n">tarantool</span><span class="o">&gt;</span> <span class="n">gis</span><span class="p">.</span><span class="n">Point</span><span class="p">(</span><span class="n">gis</span><span class="p">.</span><span class="n">Point</span><span class="p">({</span><span class="mf">37.17284</span><span class="p">,</span> <span class="mf">55.74495</span><span class="p">},</span> <span class="mi">4326</span><span class="p">):</span><span class="n">totable</span><span class="p">())</span>
+<span class="c1">---</span>
+<span class="o">-</span> <span class="n">POINT</span> <span class="p">(</span><span class="mf">37.17284</span> <span class="mf">55.74495</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis.ST.AsTable">
+<code class="descclassname">ST.</code><code class="descname">AsTable</code><span class="sig-paren">(</span><em>geometry</em><span class="sig-paren">)</span><a class="headerlink" href="#gis.ST.AsTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is an alias for <a class="reference internal" href="#gis.Geometry.table" title="gis.Geometry.table"><code class="xref py py-func docutils literal"><span class="pre">Geometry.table()</span></code></a>.</p>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="transformations.html">Transformations</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Roman Tsisyk.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>
