@@ -1,0 +1,3 @@
+examples/ usr/share/doc/tarantool-gis/
+usr/lib/@DEB_HOST_MULTIARCH@/tarantool/gis/
+usr/share/tarantool/gis/

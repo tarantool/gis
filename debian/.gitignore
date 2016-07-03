@@ -1,0 +1,9 @@
+tarantool-gis/
+tarantool-gis-doc/
+tmp/
+files
+stamp-*
+*.substvars
+*.log
+tarantool-gis.install
+tarantool-gis-doc.install

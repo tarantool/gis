@@ -1,0 +1,32 @@
+Source: tarantool-gis
+Priority: optional
+Section: database
+Maintainer: Roman Tsisyk <roman@tsisyk.com>
+Build-Depends: debhelper (>= 9), cdbs,
+               cmake (>= 2.8),
+               tarantool-dev (>= 1.6.8.0),
+               libgeos-dev (>= 3.3),
+               libproj-dev (>= 4.7),
+               python-sphinx (>= 1.1)
+Standards-Version: 3.9.7
+Homepage: https://github.com/tarantool/gis
+Vcs-Git: git://github.com/tarantool/gis.git
+Vcs-Browser: https://github.com/tarantool/gis
+
+Package: tarantool-gis
+Architecture: i386 amd64 armhf arm64
+Depends: tarantool (>= 1.6.8.0), ${shlibs:Depends}, ${misc:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Description: Full-featured geospatial extension for Tarantool Database
+ Tarantool/GIS is a full-featured geospatial extension for Tarantool Database
+ It's like PostGIS, but for Tarantool.
+
+Package: tarantool-gis-doc
+Architecture: all
+Section: doc
+Depends: ${misc:Depends}
+Description: Full-featured geospatial extension for Tarantool Database
+ Tarantool/GIS is a full-featured geospatial extension for Tarantool Database
+ It's like PostGIS, but for Tarantool.
+ .
+ This package provides html documentation.
