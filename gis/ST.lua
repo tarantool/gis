@@ -742,7 +742,7 @@ local function ST_TransformLinearRing(g, proj, toproj)
     ffi.gc(toseq, nil) -- toseq is owned by linearring
     return linearring
 end
-ST_TransformHandlers[LINEARRING] = ST_TransformLinerString
+ST_TransformHandlers[LINEARRING] = ST_TransformLineString
 
 local function ST_TransformPolygon(g, proj, toproj)
     local shell = ST_TransformLinearRing(geos.GEOSGetExteriorRing_r(handle, g),

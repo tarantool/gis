@@ -101,7 +101,7 @@ local linestringwkt = "LINESTRING (37.279357 55.849493, "..
     "37.275152 55.865005, 37.261676 55.864041)"
 status, reason = pcall(ST.GeomFromWKT)
 test:like(reason, "Usage", "GeomFromWKT()")
-status, reason = pcall(ST.GeomFromWKT, pointwkt)
+status, reason = pcall(ST.GeomFromWKT, linestringwkt)
 test:like(reason, "Usage", "GeomFromWKT(LINESTRING, missing srid")
 status, reason = pcall(ST.AsWKT)
 test:like(reason, "Usage", "AsWKT()")

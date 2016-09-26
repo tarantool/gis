@@ -28,7 +28,7 @@ local linestrings = {
 local status, reason
 status, reason = pcall(ST.MultiLineString)
 test:like(reason, "Usage", "MultiLineString()")
-status, reason = pcall(ST.MultiLineString, points)
+status, reason = pcall(ST.MultiLineString, linestrings[1])
 test:like(reason, "Usage", "MultiLineString(points)")
 status, reason = pcall(ST.MultiLineString, 12, 23223)
 test:like(reason, "Usage", "MultiLineString(invalid, srid)")
