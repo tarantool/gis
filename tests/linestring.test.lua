@@ -215,7 +215,7 @@ local utm = ST.LineString({
 }, utmid)
 
 local utm1 = ST.Transform(latlong, utmid)
-test:ok(utm:distance(utm1) < 1, "ST_Transform(latlong, utm)")
+test:ok(utm:distance(utm1) < 200, "ST_Transform(latlong, utm)")
 test:is(utm1:srid(), utmid, "ST_Transform(latlong, utm)")
 
 local latlong1 = ST.Transform(utm, latlongid)
