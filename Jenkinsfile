@@ -3,7 +3,7 @@ stage('Build'){
 
     matrix = packpack.filterMatrix(
         packpack.default_matrix,
-        {!(it['OS'] == 'centos' && it['DIST'] == '6')})
+        {!(it['OS'] == 'el' && it['DIST'] == '6')})
 
     node {
         checkout scm
