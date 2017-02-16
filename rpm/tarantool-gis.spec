@@ -1,4 +1,4 @@
-%if 0%{?fedora} >= 22
+%if 0%{?fedora} >= 25
 %bcond_without doc
 %else
 %bcond_with doc
