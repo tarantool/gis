@@ -1,0 +1,52 @@
+# Maintainer: Daniel YC Lin <dlin.tw@gmail.com>
+
+pkgname=tarantool-gis-git
+_pkgname=gis
+pkgver=0.1.r11
+pkgrel=1
+pkgdesc='A full-featured geospatial extension for Tarantool'
+arch=(i686 x86_64)
+url='http://github.com/tarantool/gis'
+license=(BSD)
+makedepends=(cmake tarantool geos proj python-sphinx)
+conflicts=(tarantool-gis)
+provides=(tarantool-gis)
+replaces=(tarantool-gis)
+#source=(https://github.com/tarantool/$_pkgname/archive/$pkgver.tar.gz)
+source=(git+https://github.com/tarantool/$_pkgname)
+
+pkgver() {
+  cd gis
+  git describe | sed 's/^v//; s/-/.r/; s/-.*//'
+}
+
+build() {
+  #cd $_pkgname-$pkgver
+  cd $_pkgname
+
+  cmake \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_BINDIR=/usr/bin \
+    -DCMAKE_INSTALL_SYSCONFDIR=/etc \
+    -DCMAKE_INSTALL_LIBDIR=/usr/lib \
+    .
+
+  make
+  make doc-html
+}
+
+check() {
+  #cd $_pkgname-$pkgver
+  cd $_pkgname
+  make test
+}
+
+package() {
+  #cd $_pkgname-$pkgver
+  cd $_pkgname
+  make install DESTDIR="$pkgdir"
+  mkdir -p $pkgdir/usr/share/doc/$pkgname/
+  cp -pR examples $pkgdir/usr/share/doc/$pkgname/
+  cp -pR doc/html $pkgdir/usr/share/doc/$pkgname/
+}
+md5sums=('SKIP')
