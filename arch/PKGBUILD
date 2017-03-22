@@ -8,7 +8,6 @@ pkgdesc='A full-featured geospatial extension for Tarantool'
 arch=(i686 x86_64)
 url='http://github.com/tarantool/gis'
 license=(BSD)
-#depends=(readline ncurses zlib libyaml)
 makedepends=(cmake tarantool geos proj python-sphinx)
 conflicts=(tarantool-gis)
 provides=(tarantool-gis)
@@ -30,12 +29,6 @@ build() {
     -DCMAKE_INSTALL_BINDIR=/usr/bin \
     -DCMAKE_INSTALL_SYSCONFDIR=/etc \
     -DCMAKE_INSTALL_LIBDIR=/usr/lib \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_SKIP_RPATH=ON \
-    -DENABLE_BUNDLED_LIBYAML:BOOL=OFF \
-    -DENABLE_BACKTRACE:BOOL=ON \
-    -DWITH_SYSTEMD:BOOL=ON \
-    -DENABLE_DIST:BOOL=ON \
     .
 
   make
