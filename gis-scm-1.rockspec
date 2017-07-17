@@ -1,4 +1,4 @@
-package = 'tarantool-gis'
+package = 'gis'
 version = 'scm-1'
 
 source  = {
@@ -21,6 +21,11 @@ dependencies = {
 }
 
 build = {
-    type = 'cmake'
+    type = 'cmake';
+    variables = {
+        CMAKE_BUILD_TYPE="RelWithDebInfo";
+        TARANTOOL_INSTALL_LIBDIR="$(LIBDIR)";
+        TARANTOOL_INSTALL_LUADIR="$(LUADIR)";
+    };
 }
 -- vim: syntax=lua ts=4 sts=4 sw=4 et
