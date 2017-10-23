@@ -29,7 +29,9 @@ local exports = {}
 -- GEOS clue
 --------------------------------------------------------------------------------
 
-local geos_path = package.searchpath('gis.lib', package.cpath)
+local geos_path  = package.search ~= nil and
+                   package.search('gis.lib') or
+                   package.searchpath('gis.lib', package.cpath)
 if geos_path == nil then
     error("Failed to find internal library")
 end

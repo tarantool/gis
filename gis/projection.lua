@@ -21,7 +21,9 @@
 local ffi = require('ffi')
 require('gis.proj4_cdef')
 
-local proj_path = package.searchpath('gis.lib', package.cpath)
+local proj_path  = package.search ~= nil and
+                   package.search('gis.lib') or
+                   package.searchpath('gis.lib', package.cpath)
 if proj_path == nil then
     error("Failed to find internal library")
 end
