@@ -4,7 +4,8 @@ add_custom_command(OUTPUT proj4_cdef.lua
     COMMAND echo 'typedef struct PJ *projPJ\;' >> proj4_cdef.tmp
     COMMAND cat ${PROJ_INCLUDE_DIR}/proj_api.h |
             sed '/\#include/d'|
-            ${CMAKE_C_COMPILER} -E - -P >> proj4_cdef.tmp
+            ${CMAKE_C_COMPILER} -E - -P -DACCEPT_USE_OF_DEPRECATED_PROJ_API_H
+            >> proj4_cdef.tmp
     COMMAND cat ${CMAKE_CURRENT_SOURCE_DIR}/lib.h >> proj4_cdef.tmp
     COMMAND echo ']]\)' >> proj4_cdef.tmp
     COMMAND ${CMAKE_COMMAND} -E rename proj4_cdef.tmp proj4_cdef.lua
@@ -16,7 +17,8 @@ add_custom_command(OUTPUT geos_cdef.lua
     COMMAND cat ${CMAKE_CURRENT_SOURCE_DIR}/lib.h >> geos_cdef.tmp
     COMMAND cat ${GEOS_INCLUDE_DIR}/geos_c.h |
             sed '/\#include/d'|
-            ${CMAKE_C_COMPILER} -E - -P -DGEOS_DLL="" -DGEOS_USE_ONLY_R_API=1 >> geos_cdef.tmp
+            ${CMAKE_C_COMPILER} -E - -P -DGEOS_DLL="" -DGEOS_USE_ONLY_R_API=1
+            -DACCEPT_USE_OF_DEPRECATED_PROJ_API_H >> geos_cdef.tmp
     COMMAND echo "\"]])\"" >> geos_cdef.tmp
     COMMAND ${CMAKE_COMMAND} -E rename geos_cdef.tmp geos_cdef.lua
 )
@@ -34,6 +36,7 @@ add_library(lib SHARED lib.c)
 target_link_libraries(lib ${GEOS_LIBRARY} ${PROJ_LIBRARY})
 set_target_properties(lib PROPERTIES PREFIX "" OUTPUT_NAME "lib")
 add_dependencies(lib generate_cdefs)
+add_definitions("-DACCEPT_USE_OF_DEPRECATED_PROJ_API_H")
 
 install(FILES init.lua DESTINATION ${TARANTOOL_INSTALL_LUADIR}/gis/)
 install(FILES projection.lua DESTINATION ${TARANTOOL_INSTALL_LUADIR}/gis/)
