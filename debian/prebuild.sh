@@ -4,6 +4,9 @@
 # during dependencies installation.
 release=$(lsb_release -c -s)
 if [ "${release}" = "bionic" ] || [ "${release}" = "cosmic" ]; then
+    # Update packages list to overcome 404 Not found error at
+    # downloading tzdata package.
+    sudo apt-get update > /dev/null
     echo "Europe/Moscow" | sudo tee /etc/timezone
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
 fi
