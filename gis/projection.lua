@@ -28,21 +28,27 @@ if proj_path == nil then
     error("Failed to find internal library")
 end
 local lib = ffi.load(proj_path)
--- local ctx = lib.pj_ctx_alloc()
--- if ctx == nil then
---     error('Failed to create proj4 context')
--- end
--- ffi.gc(ctx, lib.pj_ctx_free)
+local ctx = lib.pj_ctx_alloc()
+if ctx == nil then
+     error('Failed to create proj4 context')
+end
+ffi.gc(ctx, lib.pj_ctx_free)
 
 local projections = {}
 
 local PROJ_VERSION = ffi.string(lib.libproj_version())
 projections.PROJ_VERSION = PROJ_VERSION
 
+local function ctx_raise_errno(errno)
+    assert(errno ~= 0)
+    local errstr = lib.pj_strerrno(errno)
+    local errstr = errstr ~= nil and ffi.string(errstr) or "Unknown error"
+    error('PROJ: '..errstr)
+end
+
 local function ctx_raise()
-    -- local errno = lib.pj_ctx_get_errno(ctx)
-    local errno = lib.pj_get_errno(ctx)
-    error('PROJ: '..ffi.string(lib.pj_strerrno(errno)))
+    local errno = lib.pj_ctx_get_errno(ctx)
+    return ctx_raise_errno(errno)
 end
 
 local proj_t = ffi.typeof('struct PJ')
@@ -105,9 +111,9 @@ local function proj_transformv(src, dst, count, xvec, yvec, zvec)
               "xvec: double[], yvec: double[], zvec: double[])")
     end
     proj_arg(src)
-    local rc = lib.pj_transform(src, dst, count, 1, xvec, yvec, zvec)
-    if rc ~= 0 then
-        ctx_raise()
+    local errno = lib.pj_transform(src, dst, count, 1, xvec, yvec, zvec)
+    if errno ~= 0 then
+        ctx_raise_errno(errno)
     end
     return true
 end

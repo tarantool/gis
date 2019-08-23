@@ -8,7 +8,7 @@ local gis = require('gis')
 gis.install()
 local projection = require('gis.projection')
 local test = require('tap').test('gis.projection')
-test:plan(23)
+test:plan(25)
 
 local status, reason
 local latlong = projection[4326]
@@ -80,5 +80,18 @@ test:ok(dist(x - x1, y - y1, z - z1) < 1e-3, "transform(utm, geocent)")
 
 local a1, b1 = geocent:transform(utm44n, x, y, z)
 test:ok(dist(a - a1, b - b1) < 1e-3, "transform(geocent, utm)")
+
+--
+-- Bugs
+--
+
+-- missing declaration for symbol ''pj_get_errno''
+-- https://github.com/tarantool/gis/issues/11
+local second = gis.Point({43.035657, 131.891867}, 4326)
+local first = gis.Point({43.165000, 131.906750}, 4326)
+local linec = gis.LineString({first, second}, 4326)
+local err, reason = pcall(linec.transform, linec, 32644)
+test:is(err, false, "transform error 1")
+test:like(reason, "exceeded limits", "transform error 2")
 
 os.exit(test:check() == true and 0 or -1)
