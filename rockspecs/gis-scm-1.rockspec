@@ -26,6 +26,7 @@ build = {
         CMAKE_BUILD_TYPE="RelWithDebInfo";
         TARANTOOL_INSTALL_LIBDIR="$(LIBDIR)";
         TARANTOOL_INSTALL_LUADIR="$(LUADIR)";
+        TARANTOOL_DIR="$(TARANTOOL_DIR)";
     };
 }
 -- vim: syntax=lua ts=4 sts=4 sw=4 et
