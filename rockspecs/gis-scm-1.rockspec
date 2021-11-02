@@ -2,7 +2,7 @@ package = 'gis'
 version = 'scm-1'
 
 source  = {
-    url    = 'git://github.com/tarantool/gis.git';
+    url    = 'git+https://github.com/tarantool/gis.git';
     branch = 'master';
 }
 
