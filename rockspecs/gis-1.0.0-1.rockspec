@@ -2,7 +2,7 @@ package = 'gis'
 version = '1.0.0-1'
 
 source  = {
-    url = 'git://github.com/tarantool/gis.git';
+    url = 'git+https://github.com/tarantool/gis.git';
     tag = '1.0.0';
 }
 
