@@ -141,10 +141,10 @@ ffi.gc(wkt_writer, function(w) geos.GEOSWKTWriter_destroy_r(handle, w) end)
 geos.GEOSWKTWriter_setTrim_r(handle, wkt_writer, 1)
 
 local wkb_reader = checknil(geos.GEOSWKBReader_create_r(handle))
-ffi.gc(wkt_reader, function(w) geos.GEOSWKBReader_destroy_r(handle, w) end)
+ffi.gc(wkb_reader, function(r) geos.GEOSWKBReader_destroy_r(handle, r) end)
 
 local wkb_writer = checknil(geos.GEOSWKBWriter_create_r(handle))
-ffi.gc(wkt_writer, function(w) geos.GEOSWKBWriter_destroy_r(handle, w) end)
+ffi.gc(wkb_writer, function(w) geos.GEOSWKBWriter_destroy_r(handle, w) end)
 
 local sizeptr = ffi.new('size_t[1]')
 local doubleptr = ffi.new('double[1]')
